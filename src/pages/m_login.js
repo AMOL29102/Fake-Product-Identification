@@ -44,13 +44,7 @@ const ManufacturerLogin = (props) => {
     icon.classList.add("fa", "fa-spinner", "fa-pulse");
 
     try {
-      const response = await axios.post("http://localhost:3001/m_signup", {
-        id,
-        brand,
-        city,
-        pass,
-      });
-      console.log(response.data);
+      // console.log(response.data);
       const accounts = await web3.eth.getAccounts();
       await factory.methods
         .createManufacturer(id, brand)
@@ -61,6 +55,13 @@ const ManufacturerLogin = (props) => {
       toast.success("Account Created Successfully!", {
         position: "top-center",
         autoClose: 2500,
+      });
+
+      const response = await axios.post("http://localhost:3001/m_signup", {
+        id,
+        brand,
+        city,
+        pass,
       });
 
       props.setBrandName(res.data.manuf_brand);
@@ -151,28 +152,28 @@ const ManufacturerLogin = (props) => {
             <form onSubmit={handleSignUp}>
               <h1>Create Account</h1>
               <input
-              required
+                required
                 type="text"
                 placeholder="Manufacturer ID"
                 value={id}
                 onChange={(e) => setId(e.target.value)}
               />
               <input
-              required
+                required
                 type="text"
                 placeholder="Manufacturer Brand"
                 value={brand}
                 onChange={(e) => setBrand(e.target.value)}
               />
               <input
-              required
+                required
                 type="text"
                 placeholder="Manufacturer City"
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
               />
               <input
-              required
+                required
                 type="password"
                 placeholder="Password"
                 value={pass}
@@ -187,7 +188,6 @@ const ManufacturerLogin = (props) => {
             <form onSubmit={handleSignIn}>
               <h1>Sign In</h1>
               <input
-             
                 required
                 type="text"
                 placeholder="Manufacturer ID"
