@@ -7,7 +7,6 @@ import "@fortawesome/fontawesome-free/css/all.css";
 import { PiArrowCircleLeftDuotone } from "react-icons/pi";
 import { toast } from "react-toastify";
 
-
 const SellerLogin = () => {
   const [id, setId] = useState("");
   const [city, setCity] = useState("");
@@ -44,18 +43,20 @@ const SellerLogin = () => {
 
     icon.classList.add("fa", "fa-spinner", "fa-pulse");
     try {
-      const response = await axios.post("http://localhost:3001/s_signup", {
-        id,
-        city,
-        pass,
-      });
+      const response = await axios.post(
+        "https://server-qq5v.onrender.com/s_signup",
+        {
+          id,
+          city,
+          pass,
+        }
+      );
       console.log(response.data);
 
       toast.success("Account Created Successfully!", {
         position: "top-center",
         autoClose: 2500,
       });
-
     } catch (error) {
       console.error("Error signing up:", error);
       setError("Error signing up. Please try again.");
@@ -91,10 +92,13 @@ const SellerLogin = () => {
     event.preventDefault();
     console.log("printintg in slogin", id, pass);
     try {
-      const response = await axios.post("http://localhost:3001/s_signin", {
-        id,
-        pass,
-      });
+      const response = await axios.post(
+        "https://server-qq5v.onrender.com/s_signin",
+        {
+          id,
+          pass,
+        }
+      );
       if (response.data == "1") {
         // alert("Login successful");
         toast.success("Logged In Successfully!", {
@@ -105,8 +109,6 @@ const SellerLogin = () => {
       } else {
         // alert("Login unsuccessful else");
       }
-
-      
     } catch (error) {
       console.error("Error signing in:", error);
       setError("Invalid credentials. Please try again.");

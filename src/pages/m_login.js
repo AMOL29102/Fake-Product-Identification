@@ -50,19 +50,24 @@ const ManufacturerLogin = (props) => {
         .createManufacturer(id, brand)
         .send({ from: accounts[0], gas: "20000000" });
 
-      const res = await axios.post("http://localhost:3001/brand", { id });
+      const res = await axios.post("https://server-qq5v.onrender.com/brand", {
+        id,
+      });
 
       toast.success("Account Created Successfully!", {
         position: "top-center",
         autoClose: 2500,
       });
 
-      const response = await axios.post("http://localhost:3001/m_signup", {
-        id,
-        brand,
-        city,
-        pass,
-      });
+      const response = await axios.post(
+        "https://server-qq5v.onrender.com/m_signup",
+        {
+          id,
+          brand,
+          city,
+          pass,
+        }
+      );
 
       props.setBrandName(res.data.manuf_brand);
       props.setCity(res.data.manuf_city);
@@ -105,13 +110,18 @@ const ManufacturerLogin = (props) => {
     event.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:3001/m_signin", {
-        id,
-        pass,
-      });
+      const response = await axios.post(
+        "https://server-qq5v.onrender.com/m_signin",
+        {
+          id,
+          pass,
+        }
+      );
 
       if (response.data === "Successfully signed in") {
-        const res = await axios.post("http://localhost:3001/brand", { id });
+        const res = await axios.post("https://server-qq5v.onrender.com/brand", {
+          id,
+        });
         console.log(res);
         props.setBrandName(res.data.manuf_brand);
         props.setCity(res.data.manuf_city);
