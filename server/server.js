@@ -11,7 +11,7 @@ require("dotenv").config();
 db.connect();
      
 const app = express();
-const port = process.env.PORT  || 3001;
+const port = process.env.PORT  || 5432;
 const saltRounds = 10;
 
 app.use(express.json());
