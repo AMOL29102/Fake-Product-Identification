@@ -50,7 +50,7 @@ const ManufacturerLogin = (props) => {
         .createManufacturer(id, brand)
         .send({ from: accounts[0], gas: "20000000" });
 
-      const res = await axios.post("https://server-qq5v.onrender.com/brand", {
+      const res = await axios.post("https://server-j91qaldsw-amol29102s-projects.vercel.app/brand", {
         id,
       });
 
@@ -60,7 +60,7 @@ const ManufacturerLogin = (props) => {
       });
 
       const response = await axios.post(
-        "https://server-qq5v.onrender.com/m_signup",
+        "https://server-j91qaldsw-amol29102s-projects.vercel.app/m_signup",
         {
           id,
           brand,
@@ -111,7 +111,7 @@ const ManufacturerLogin = (props) => {
 
     try {
       const response = await axios.post(
-        "https://server-qq5v.onrender.com/m_signin",
+        "https://server-j91qaldsw-amol29102s-projects.vercel.app/m_signin",
         {
           id,
           pass,
@@ -119,7 +119,7 @@ const ManufacturerLogin = (props) => {
       );
 
       if (response.data === "Successfully signed in") {
-        const res = await axios.post("https://server-qq5v.onrender.com/brand", {
+        const res = await axios.post("https://server-j91qaldsw-amol29102s-projects.vercel.app/brand", {
           id,
         });
         console.log(res);

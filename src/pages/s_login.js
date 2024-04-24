@@ -44,7 +44,7 @@ const SellerLogin = () => {
     icon.classList.add("fa", "fa-spinner", "fa-pulse");
     try {
       const response = await axios.post(
-        "https://server-qq5v.onrender.com/s_signup",
+        "https://server-j91qaldsw-amol29102s-projects.vercel.app/s_signup",
         {
           id,
           city,
@@ -93,7 +93,7 @@ const SellerLogin = () => {
     console.log("printintg in slogin", id, pass);
     try {
       const response = await axios.post(
-        "https://server-qq5v.onrender.com/s_signin",
+        "https://server-j91qaldsw-amol29102s-projects.vercel.app/s_signin",
         {
           id,
           pass,

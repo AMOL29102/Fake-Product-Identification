@@ -9,14 +9,14 @@ const session = require("express-session");
 require("dotenv").config();
 
 db.connect();
-     
+
 const app = express();
-const port = process.env.PORT  || 5432;
+const port = process.env.PORT || 5432;
 const saltRounds = 10;
 
 app.use(express.json());
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));;
+app.use(bodyParser.urlencoded({ extended: true }));
 app.post("/s_signup", (req, res) => {
   const { id, city, pass } = req.body;
   bcrypt.hash(pass, saltRounds, function (err, hash) {
@@ -51,20 +51,18 @@ app.post("/s_signin", (req, res) => {
       return res.status(401).send("Invalid credentials");
     }
       return res.status(200).send("1");*/
-      try{
-    bcrypt.compare(pass, result.rows[0].pass, function (err, reslt) {
-      if (reslt) {
-        res.status(200).send("1");
-      } else {
-        return res.status(402).send("Invalid credentials");
-      }
-    });
-  }catch{
-
-    res.status(401).send("Invalid credentials");
-
-
-  }
+    try {
+      bcrypt.compare(pass, result.rows[0].pass, function (err, reslt) {
+        if (reslt) {
+          // res.redirect("../src/pages/manufacturer/index/index.js");
+          return res.status(200).send("0");
+        } else {
+          return res.status(402).send("Invalid credentials");
+        }
+      });
+    } catch {
+      res.status(401).send("Invalid credentials");
+    }
   });
 });
 
