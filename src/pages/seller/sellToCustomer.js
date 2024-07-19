@@ -26,7 +26,7 @@ const SellToCustomer = () => {
       const accounts = await web3.eth.getAccounts();
 
       const consumerCode = Math.floor(Math.random() * 1000000);
-      const response = await axios.post("http://localhost:3001/sendEmail", {
+      const response = await axios.post("https://server-l1pm5nz5z-amol29102s-projects.vercel.app/sendEmail", {
         brand,
         prodId,
         email,
