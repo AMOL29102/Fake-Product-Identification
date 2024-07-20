@@ -43,8 +43,9 @@ const SellerLogin = () => {
 
     icon.classList.add("fa", "fa-spinner", "fa-pulse");
     try {
+      console.log("SignUp S_Login");
       const response = await axios.post(
-        "https://server-l1pm5nz5z-amol29102s-projects.vercel.app/s_signup",
+        "http://localhost:3002/s_signup",
         {
           id,
           city,
@@ -90,10 +91,10 @@ const SellerLogin = () => {
 
   const handleSignIn = async (event) => {
     event.preventDefault();
-    console.log("printintg in slogin", id, pass);
+    console.log("printing in slogin", id, pass);
     try {
       const response = await axios.post(
-        "https://server-l1pm5nz5z-amol29102s-projects.vercel.app/s_signin",
+        "http://localhost:3002/s_signin",
         {
           id,
           pass,

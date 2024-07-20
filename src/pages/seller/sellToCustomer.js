@@ -8,7 +8,6 @@ import axios from "axios";
 import "@fortawesome/fontawesome-free/css/all.css";
 import { toast } from "react-toastify";
 
-
 const SellToCustomer = () => {
   const [brand, setBrand] = useState("");
   const [prodId, setProdId] = useState("");
@@ -26,7 +25,7 @@ const SellToCustomer = () => {
       const accounts = await web3.eth.getAccounts();
 
       const consumerCode = Math.floor(Math.random() * 1000000);
-      const response = await axios.post("https://server-l1pm5nz5z-amol29102s-projects.vercel.app/sendEmail", {
+      const response = await axios.post("http://localhost:3002/sendEmail", {
         brand,
         prodId,
         email,
@@ -51,7 +50,7 @@ const SellToCustomer = () => {
       // `;
       toast.success("Consumer Code sent Successfully on Email!", {
         position: "top-center",
-        autoClose:2500
+        autoClose: 2500,
       });
     } catch {
       //   signRef.current.innerHTML = `
@@ -66,8 +65,7 @@ const SellToCustomer = () => {
       // font-size: 18px; text-align : center ">Transaction Rejected!</p>`;
       toast.error("Transaction Discarded!", {
         position: "top-center",
-        autoClose:2500
-
+        autoClose: 2500,
       });
 
       // toast.error("Error Notification !", {
@@ -83,7 +81,7 @@ const SellToCustomer = () => {
       <form onSubmit={sold}>
         <div class="grp">
           <input
-          required
+            required
             type="text"
             // placeholder="Enter Manufacturer brand name"
             name="manuf_brand"
@@ -94,7 +92,7 @@ const SellToCustomer = () => {
         </div>
         <div class="grp">
           <input
-          required
+            required
             type="text"
             // placeholder="Enter Product Id"
             name="product_id"
@@ -105,7 +103,7 @@ const SellToCustomer = () => {
         </div>
         <div class="grp">
           <input
-          required
+            required
             type="text"
             // placeholder="Enter Customer Email"
             name="cust_email"

@@ -8,15 +8,24 @@ const db = require("./config");
 const session = require("express-session");
 require("dotenv").config();
 
+// const db = new pg.Client({
+//   user: "postgres",
+//   host: "localhost",
+//   database: "PBL",
+//   password: "AmPpg@123",
+//   port: 5432,
+// });
+
 db.connect();
 
 const app = express();
-const port = process.env.PORT || 5432;
+const port = 3002;
 const saltRounds = 10;
 
 app.use(express.json());
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
+9;
 app.post("/s_signup", (req, res) => {
   const { id, city, pass } = req.body;
   bcrypt.hash(pass, saltRounds, function (err, hash) {
@@ -51,18 +60,13 @@ app.post("/s_signin", (req, res) => {
       return res.status(401).send("Invalid credentials");
     }
       return res.status(200).send("1");*/
-    try {
-      bcrypt.compare(pass, result.rows[0].pass, function (err, reslt) {
-        if (reslt) {
-          // res.redirect("../src/pages/manufacturer/index/index.js");
-          return res.status(200).send("0");
-        } else {
-          return res.status(402).send("Invalid credentials");
-        }
-      });
-    } catch {
-      res.status(401).send("Invalid credentials");
-    }
+    bcrypt.compare(pass, result.rows[0].pass, function (err, reslt) {
+      if (reslt) {
+        res.status(200).send("1");
+      } else {
+        return res.status(402).send("Invalid credentials");
+      }
+    });
   });
 });
 
@@ -89,36 +93,25 @@ app.post("/m_signup", (req, res) => {
 });
 
 app.post("/m_signin", (req, res) => {
-  try {
-    const { id, pass } = req.body;
-    db.query(
-      "SELECT * FROM manufacturer WHERE manuf_id = $1",
-      [id],
-      (err, result) => {
-        if (err) {
-          console.error("Error retrieving manufacturer:", err.stack);
-          return res.status(500).send({ error: "Error signing in" });
-        }
-
-        const manufacturer = result.rows[0];
-        try {
-          bcrypt.compare(pass, manufacturer.pass, function (err, reslt) {
-            if (reslt) {
-              res.status(200).send("Successfully signed in");
-            } else {
-              res.status(401).send("Invalid credentials");
-            }
-          });
-        } catch {
-          // alert("Very wrong credentials");
-          // console.log("wrong very wrong");
+  const { id, pass } = req.body;
+  db.query(
+    "SELECT * FROM manufacturer WHERE manuf_id = $1",
+    [id],
+    (err, result) => {
+      if (err) {
+        console.error("Error retrieving manufacturer:", err.stack);
+        return res.status(500).send({ error: "Error signing in" });
+      }
+      const manufacturer = result.rows[0];
+      bcrypt.compare(pass, manufacturer.pass, function (err, reslt) {
+        if (reslt) {
+          res.status(200).send("Successfully signed in");
+        } else {
           res.status(401).send("Invalid credentials");
         }
-      }
-    );
-  } catch {
-    alert("Wrong Credentials!");
-  }
+      });
+    }
+  );
 });
 
 app.post("/brand", (req, res) => {
@@ -168,6 +161,12 @@ app.post("/sendEmail", (req, res) => {
     console.log(consumerCode);
     return res.sendStatus(200);
   });
+});
+
+app.get("/logout", (req, res) => {
+  res.send("logged out");
+  res.render("../src/pages/m_login");
+  return res.status(200).send("logged out");
 });
 
 app.listen(port, () => {
