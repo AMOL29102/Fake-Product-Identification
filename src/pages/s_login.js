@@ -45,7 +45,7 @@ const SellerLogin = () => {
     try {
       console.log("SignUp S_Login");
       const response = await axios.post(
-        "http://localhost:3002/s_signup",
+        "https://server-iyuf-git-main-amol29102s-projects.vercel.app/s_signup",
         {
           id,
           city,
@@ -94,7 +94,7 @@ const SellerLogin = () => {
     console.log("printing in slogin", id, pass);
     try {
       const response = await axios.post(
-        "http://localhost:3002/s_signin",
+        "https://server-iyuf-git-main-amol29102s-projects.vercel.app/s_signin",
         {
           id,
           pass,

@@ -25,12 +25,15 @@ const SellToCustomer = () => {
       const accounts = await web3.eth.getAccounts();
 
       const consumerCode = Math.floor(Math.random() * 1000000);
-      const response = await axios.post("http://localhost:3002/sendEmail", {
-        brand,
-        prodId,
-        email,
-        consumerCode,
-      });
+      const response = await axios.post(
+        "https://server-iyuf-git-main-amol29102s-projects.vercel.app/sendEmail",
+        {
+          brand,
+          prodId,
+          email,
+          consumerCode,
+        }
+      );
 
       const manuIns = Manufacturer(address);
       await manuIns.methods
